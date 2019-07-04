@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title> title </title>
-    <link rel='stylesheet' href='css/index.css'/>
-</head>
+    <head>
+        <title> title </title>
+        <link rel='stylesheet' type="text/css" href='css/base.css' />
+        <link rel='stylesheet' type="text/css" href='css/index.css' />
+    </head>
 
-<body>
-    <div id="pub-index">
-        <a href="/login">登录</a>
-        <a href="/register">注册</a>
-    </div>
-</body>
+    <body>
+        <article id="public" class="public">
+            <section class="main-login">
+                <h2 class="main-title">
+                    <a href="/login" title="">Sign in</a>
+                    <a href="/register" title="">Sign up</a>
+                </h2>
+                <div class="main-form">
+                    <div class="main-form-box" id="main-form-box">
+                        <aside class="main-form-login">
+                            <ul>
+                                <li><label for="">username:</label><input type="text"></li>
+                                <li><label for="">password:</label><input type="text"></li>
+                            </ul>
+                            <div class="main-form-exp">
+                                <a href="javascript:void(0)">忘记密码？找回密码</a>
+                            </div>
+                            <a href="/login" class="main-form-user-login">Sign in</a>
+                        </aside>
+                        <aside class="main-form-register">
+                            <ul>
+                                <li><label for="">username:</label><input type="text"></li>
+                                <li><label for="">password:</label><input type="text"></li>
+                                <li><label for="">password:</label><input type="text"></li>
+                            </ul>
+                            <div class="main-form-exp">
+                                <a href="javascript:void(0)">忘记密码？找回密码</a>
+                            </div>
+                            <a href="/register" class="main-form-user-register">Sign up</a>
+                        </aside>
+                    </div>
+                    <aside class="main-info">
+                        <p>使用第三方賬號直接登錄：</p>
+                        <div>
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </article>
+    </body>
 
 </html>
