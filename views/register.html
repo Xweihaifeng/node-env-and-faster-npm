@@ -1,38 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
-        <meta charset="UTF-8">
-        <title>regist</title>
+        <title> register </title>
+        <link rel='stylesheet' type="text/css" href='css/base.css' />
+        <link rel='stylesheet' type="text/css" href='css/index.css' />
     </head>
 
     <body>
-        <div>
-            <label for="user">用户名</label>
-            <input type="text" id="user">
-        </div>
-        <div>
-            <label for="password">密&nbsp;&nbsp;&nbsp;码</label>
-            <input type="password" id="password">
-        </div>
-        <div>
-            <button id="login"><a href="/register">登录</a></button>
-            <button id="register">注册</button>
-        </div>
+        <article id="public" class="public">
+            <section class="main-login">
+                <h2 class="main-title">
+                    <a href="/login" title="">Sign in</a>
+                    <a href="/register" title="">Sign up</a>
+                </h2>
+                <div class="main-form">
+                    <div class="main-form-box" id="main-form-box">
+                        <aside class="main-form-register">
+                            <ul>
+                                <li><label for="">username:</label><input type="text"></li>
+                                <li><label for="">password:</label><input type="text"></li>
+                                <li><label for="">password:</label><input type="text"></li>
+                            </ul>
+                            <div class="main-form-exp">
+                                <a href="javascript:void(0)">忘记密码？找回密码</a>
+                            </div>
+                            <a class="main-form-user-register">Sign up</a>
+                        </aside>
+                    </div>
+                    <aside class="main-info">
+                        <p>使用第三方账号直接登录：</p>
+                        <div>
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </article>
     </body>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script>
         $(function() {
-            $("#register").click(function() {
+            $(".main-form-user-register").click(function() {
+                if (!$("#username").val()) {
+                    return alert("请输入内容!");
+                }
+                if (!$("#password").val()) {
+                    return alert("请输入密码!");
+                }
                 $.ajax({
-                    url: "http://localhost:3000/register",
+                    url: "/userLogin",
                     type: "POST",
                     data: {
-                        username: $("#user").val(),
+                        username: $("#username").val(),
                         password: $("#password").val()
                     },
                     success: function(res) {
-                        alert(res);
+                        console.success("登录成功!")
+                        window.location.href = '/home';
                     },
                     error: function(err) {
                         console.log(err);

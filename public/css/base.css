@@ -7,8 +7,9 @@ html, body { margin: 0; padding: 0; width: 100vw; height: 100vh; }
 a { text-decoration: none; display: inline-block; }
 img { vertical-align: middle; border: none }
 ul, li { list-style: none; }
-pre, p {white-space:  unset;display:  inline-block;margin: 0;padding: 0;}
+pre, p { white-space: unset; display: inline-block; margin: 0; padding: 0; }
 span, label { display: inline-block; text-decoration: none }
 input[type=checkbox], input[type=radio] { width: 15px; height: 15px; position: relative; top: 3px; cursor: pointer; }
 input::-webkit-input-placeholder { color: #999; }
-#public {background: url(../img/default-bg.png) no-repeat center;background-size: 100% 100%;position: fixed;width: 100vw;height: 100vh;}
+#public { background: url(../img/default-bg.png) no-repeat center; background-size: 100% 100%; position: fixed; width: 100vw; height: 100vh; }
+#popupBox { min-width: 10rem; padding: 0.5rem 1.5rem; min-height: 3.5rem; position: fixed; transform: translate(-50%, -50%); left: 50%; top: 5%; background-color: rgba(0, 0, 0, .8); color: rgb(255, 255, 255); text-align: center; line-height: 3.5rem; border-radius: 5px; display: none; z-index: 1000; }

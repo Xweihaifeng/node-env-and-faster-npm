@@ -1,54 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
-        <meta charset="UTF-8">
-        <title>login</title>
+        <title> login </title>
+        <link rel='stylesheet' type="text/css" href='css/base.css' />
+        <link rel='stylesheet' type="text/css" href='css/index.css' />
     </head>
 
     <body>
-        <div>
-            <label for="user">用户名</label>
-            <input type="text" id="user">
-        </div>
-        <div>
-            <label for="password">密&nbsp;&nbsp;&nbsp;码</label>
-            <input type="password" id="password">
-        </div>
-        <div>
-            <button id="login">登录</button>
-            <button id="register"><a href="/register">注册</a></button>
-        </div>
+        <article id="public" class="public">
+            <section class="main-login">
+                <h2 class="main-title">
+                    <a href="/login" title="">Sign in</a>
+                    <a href="/register" title="">Sign up</a>
+                </h2>
+                <div class="main-form">
+                    <div class="main-form-box" id="main-form-box">
+                        <aside class="main-form-login">
+                            <ul>
+                                <li><label for="">username:</label><input type="text" id="username" value="admin"></li>
+                                <li><label for="">password:</label><input type="text" id="password" value="admin"></li>
+                            </ul>
+                            <div class="main-form-exp">
+                                <a href="javascript:void(0)">忘记密码？找回密码</a>
+                            </div>
+                            <a href="/login" class="main-form-user-login">Sign in</a>
+                        </aside>
+                    </div>
+                    <aside class="main-info">
+                        <p>使用第三方账号直接登录：</p>
+                        <div>
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                            <img src="img/default-bg.png" >
+                        </div>
+                    </aside>
+                </div>
+            </section>
+            <section id="popupBox"></section>
+        </article>
     </body>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script>
+        /***********************
+         * 弹出层消息
+         ***********************/
+        function popup(contents) {
+            var stat = false;
+            if (!contents) {
+                contents = '请正确步骤后操作：<br />（1）、先选择显示图层；<br />（2）、再选择当前操作图层！';
+            }
+            $('#popupBox').html('<div>' + contents + '</div>');
+            for (var i = 0; i < $('#getGeojson > div').length; i++) {
+                var stat1 = $($($('#getGeojson > div')[i]).children('input')[0]).prop('checked');
+                var stat2 = $($($('#getGeojson > div')[i]).children('input')[1]).prop('checked');
+                if (stat1 && stat2) {
+                    $('#popupBox').html('');
+                    stat = false;
+                    break;
+                } else {
+                    stat = true;
+                }
+            }
+            if (stat) {
+                $('#popupBox div').fadeIn('slow').delay(1500).fadeOut('slow');
+            }
+            return stat;
+        };
+
         $(function() {
-            $("#login").click(function() {
-                if (!$("#user").val()) {
-                    return alert("请输入内容!");
+            $(".main-form-user-login").click(function() {
+                if (!$("#username").val()) {
+                    return popup("请输入内容！");
                 }
                 if (!$("#password").val()) {
-                    return alert("请输入密码!");
+                    return popup("请输入密码！");
                 }
-                // window.location.href = '/home';
-
                 $.ajax({
-                    url: "/userLogin",
-                    type: "GET",
+                    url: '/userLogin',
+                    type: 'POST',
+                    dataType: 'json',
                     data: {
-                        username: $("#user").val(),
+                        username: $("#username").val(),
                         password: $("#password").val()
                     },
                     success: function(res) {
-                        alert("登录成功!")
+                        popup("登录成功！")
+                        window.location.href = '/home';
                     },
                     error: function(err) {
-                        console.log(err);
+                        popup('登录失败！');
                     }
                 })
-
             })
         });
     </script>
-
 </html>

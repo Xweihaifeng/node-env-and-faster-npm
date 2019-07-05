@@ -1,15 +1,13 @@
-
-var express = require('express');
 var mysql = require('mysql');
+var express = require('express');
 var app = express();
+app.use(express.static('public'));
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 /* 连接mysql数据库 */
 var connection = mysql.createConnection({
-    host:     'localhost',
+    host:     '127.0.0.1',
     user:     'root',
     password: 'root',
     port:     '3306',
@@ -36,17 +34,23 @@ app.all('*', function(req, res, next) {
 
 //创建请求服务
 app.post('/userLogin', function (req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
-    var sql = `select * from login where username = '${username}' and password = '${password}'`;
+    console.log(req, res);
+    var username = req.query.username;
+    var password = req.query.password;
+    /*var sql = `select * from user where username = '${username}' and password = '${password}'`;*/
+    var sql = "select * from user where username = '"+usernamet+"' and password = '"+password+"'";
+    /*var sql = "select * from user where username = 'admin' and password = 'admin'";*/
+    console.log('连接到数据库登录：', sql);
     connection.query(sql, function (err, result) {
+        debugger;
         console.log(result)
         if (err || result.length == 0) {
             res.status(200),
-                res.json("登陆失败")
+            res.json("登陆失败")
         } else {
             res.status(200),
-                res.json("登陆成功")
+            res.json("登陆成功"),
+            res.sendfile(__dirname + "/" + "home.html" );
         }
     });
 })
