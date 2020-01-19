@@ -19,7 +19,7 @@
                         <aside class="main-form-login">
                             <ul>
                                 <li><label for="">username:</label><input type="text" id="username" value="admin"></li>
-                                <li><label for="">password:</label><input type="text" id="password" value="admin"></li>
+                                <li><label for="">password:</label><input type="password" id="password" value="admin"></li>
                             </ul>
                             <div class="main-form-exp">
                                 <a href="javascript:void(0)">忘记密码？找回密码</a>
@@ -78,8 +78,8 @@
                     return popup("请输入密码！");
                 }
                 $.ajax({
-                    url: '/userLogin',
-                    type: 'POST',
+                    url: 'userLogin',
+                    type: 'GET',
                     dataType: 'json',
                     data: {
                         username: $("#username").val(),
@@ -90,6 +90,7 @@
                         window.location.href = '/home';
                     },
                     error: function(err) {
+                        debugger
                         popup('登录失败！');
                     }
                 })

@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 /* 连接mysql数据库 */
 var connection = mysql.createConnection({
-    host:     '127.0.0.1',
+    host:     'localhost',
     user:     'root',
     password: 'root',
     port:     '3306',
@@ -23,17 +23,17 @@ connection.connect(function(err) {
 })
 
 //设置跨域访问
-app.all('*', function(req, res, next) {
+/* app.all('*', function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
    res.header("X-Powered-By", '3.2.1')
    res.header("Content-Type", "application/json;charset=utf-8");
    next();
-});
+}); */
 
 //创建请求服务
-app.post('/userLogin', function (req, res) {
+app.get('userLogin', function (req, res) {
     console.log(req, res);
     var username = req.query.username;
     var password = req.query.password;
